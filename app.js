@@ -14,14 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 
 //import items route
 const itemsRoute = require("./routes/itemRoute");
-app.use("/items", itemsRoute);
-
-//home route
-app.get("/", (req, res) => {
-  res.send("we are at home");
-});
-
-app.use(express.static("client/build"));
 
 const PORT = process.env.PORT || 5000;
 
@@ -39,6 +31,9 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
   console.log("Mongoose Default Connection Error: " + err);
 });
+
+app.use(express.static("client/build"));
+app.use("/items", itemsRoute);
 
 //Listening to the server
 app.listen(PORT);
