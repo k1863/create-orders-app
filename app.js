@@ -4,6 +4,9 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+const router = require("express").Router();
+
+const orders = require("./routes/index");
 
 const PORT = process.env.PORT || 5000;
 
