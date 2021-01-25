@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+const URI = require("./config/index");
 
 const PORT = process.env.PORT || 5000;
 
@@ -13,7 +14,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-mongoose.connect(process.env.DB_CONNECTION, {
+mongoose.connect(process.env.DB_CONNECTION || URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -42,7 +43,7 @@ if (
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
   });
 }
-app.use("/items", itemsRoute);
+app.use("/api/items", itemsRoute);
 
 //Listening to the server
 app.listen(PORT);

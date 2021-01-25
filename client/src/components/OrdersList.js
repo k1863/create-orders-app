@@ -9,7 +9,7 @@ export default class OrdersList extends React.Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:5000/items").then((res) => {
+    axios.get("/api/items/").then((res) => {
       console.log(res.data);
       this.setState({ items: res.data });
     });
