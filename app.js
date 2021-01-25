@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 require("dotenv/config");
 
@@ -20,6 +21,10 @@ app.get("/", (req, res) => {
   res.send("we are at home");
 });
 
+app.use(express.static("client/build"));
+
+const PORT = process.env.PORT || 5000;
+
 mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -36,4 +41,4 @@ mongoose.connection.on("error", (err) => {
 });
 
 //Listening to the server
-app.listen(process.env.PORT);
+app.listen(PORT);
