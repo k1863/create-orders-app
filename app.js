@@ -10,12 +10,12 @@ require("dotenv/config");
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//import routes
-const itemsRoute = require("./routes/itemRoute");
 
+//import items route
+const itemsRoute = require("./routes/itemRoute");
 app.use("/items", itemsRoute);
 
-//routes
+//home route
 app.get("/", (req, res) => {
   res.send("we are at home");
 });
@@ -36,4 +36,4 @@ mongoose.connection.on("error", (err) => {
 });
 
 //Listening to the server
-app.listen(5000);
+app.listen(process.env.PORT);
