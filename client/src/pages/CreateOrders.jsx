@@ -1,32 +1,44 @@
 import React from "react";
-import OrderForm from "./OrderForm";
-import fetch from "isomorphic-fetch";
+import CreateOrderForm from "../components/CreateOrderForm";
 
-class CreateOrderList extends React.Component {
+class CreateOrders extends React.Component {
   state = {
-    items: {},
+    code_id: "",
+    quantity: "",
+    item_value: "",
+    discount: "",
+    total_value: "",
+    description: "",
+    situation: "",
   };
 
   onSubmit = (data) => {
-    this.setState({ items: data });
+    this.setState({
+      code_id: data.code_id,
+      quantity: data.quantity,
+      item_value: data.item_value,
+      discount: data.discount,
+      total_value: data.total_value,
+      description: data.description,
+      situation: data.situation,
+    });
 
-    fetch("/items", {
+    const requestOptions = {
       method: "POST",
-      mode: "CORS",
-      body: JSON.stringify(this.state.items),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        res.json();
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => err);
-    console.log(this.state.items);
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        code_id: this.state.code_id,
+        quantity: this.state.quantity,
+        item_value: this.state.item_value,
+        discount: this.state.discount,
+        total_value: this.state.total_value,
+        description: this.state.description,
+        situation: this.state.situation,
+      }),
+    };
+    fetch("http://localhost:5000/items", requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   };
 
   render() {
@@ -34,10 +46,10 @@ class CreateOrderList extends React.Component {
       <div className="container">
         <div className="mt-3">
           <h3>Create Order Item</h3>
-          <OrderForm onSubmit={this.onSubmit} />
+          <CreateOrderForm onSubmit={this.onSubmit} />
         </div>
       </div>
     );
   }
 }
-export default CreateOrderList;
+export default CreateOrders;
