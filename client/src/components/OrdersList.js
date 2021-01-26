@@ -35,7 +35,7 @@ export default class OrdersList extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {orderItems.map((orderItem) => (
+                {orderItems?.map((orderItem) => (
                   <tr key={orderItem._id}>
                     <td>{orderItem._id}</td>
                     <td>{orderItem.createdAt}</td>
