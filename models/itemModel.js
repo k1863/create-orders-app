@@ -32,6 +32,7 @@ const itemSchema = mongoose.Schema(
     date: {
       type: Date,
       default: Date.now,
+      $dateToParts: { date: "$date" },
     },
   },
   { timestamps: true }

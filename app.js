@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-mongoose.connect(process.env.DB_CONNECTION || URI, {
+mongoose.connect(process.env.MONGODB_URI || URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -43,7 +43,9 @@ if (
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
   });
 }
-app.use("/api/items", itemsRoute);
+app.use("/items", itemsRoute);
 
 //Listening to the server
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}.`);
+});

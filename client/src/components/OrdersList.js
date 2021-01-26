@@ -9,10 +9,16 @@ export default class OrdersList extends React.Component {
   };
 
   componentDidMount() {
-    axios.get("api/items").then((res) => {
-      console.log(res.data);
-      this.setState({ items: res.data });
-    });
+    axios
+      .get("http://localhost:5000/items")
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ items: res.data });
+      })
+      .catch((err) => {
+        // what now?
+        console.log(err);
+      });
   }
 
   render() {
@@ -35,7 +41,7 @@ export default class OrdersList extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {orderItems?.map((orderItem) => (
+                {orderItems.map((orderItem) => (
                   <tr key={orderItem._id}>
                     <td>{orderItem._id}</td>
                     <td>{orderItem.createdAt}</td>
