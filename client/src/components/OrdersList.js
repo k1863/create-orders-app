@@ -12,7 +12,6 @@ export default class OrdersList extends React.Component {
     axios
       .get("/items")
       .then((res) => {
-        console.log(res.data);
         this.setState({ items: res.data });
       })
       .catch((err) => {
