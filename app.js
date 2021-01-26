@@ -43,7 +43,7 @@ if (
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
   });
 }
-app.use("/items", itemsRoute);
+app.use("api/items", itemsRoute);
 
 //Listening to the server
 app.listen(PORT, () => {

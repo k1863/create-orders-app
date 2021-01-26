@@ -10,7 +10,7 @@ export default class OrdersList extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/items")
+      .get("/api/items")
       .then((res) => {
         this.setState({ items: res.data });
       })

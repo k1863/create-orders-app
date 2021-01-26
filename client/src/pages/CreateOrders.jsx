@@ -36,9 +36,10 @@ class CreateOrders extends React.Component {
         situation: this.state.situation,
       }),
     };
-    fetch("/items", requestOptions)
+    fetch("/api/items", requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   };
 
   render() {
